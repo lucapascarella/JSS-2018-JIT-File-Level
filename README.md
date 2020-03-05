@@ -187,7 +187,7 @@ Repeat the above step for every project you want to analyze.
 
 Change working directory ```cd ..```
 
-### Run other classifiers (partially defective commits or fully defective only)
+### Run other classifiers (partially or fully defective commits only)
 
 To run our scripts on a reduced set of commits, including exclusively partially or fully defective commits only you must change the working directory and invoke the right scripts.
 This example is for _JDeodorant_ only which is the smallest (fastest) project to analyze.
