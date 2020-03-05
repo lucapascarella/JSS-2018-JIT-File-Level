@@ -1,6 +1,6 @@
 # Fine-grained just-in-time defect-prediction
 
-This project contains scripts and data used to re-implemented a faster solution to replicate the work "[Fine-grained just-in-time defect-prediction](https://github.com/lucapascarella/JIT-file-level/blob/master/Pascarella_JSS_2018.pdf)" published at the Journal of Systems and Software in 2018.
+This project contains scripts and data used to re-implemented a faster solution to replicate the work "[Fine-grained just-in-time defect-prediction](https://github.com/lucapascarella/JSS-2018-JIT-File-Level/blob/master/Pascarella_JSS_2018.pdf)" published at the Journal of Systems and Software in 2018.
 
 ## NOTES
 JIT defect-prediction is based on a pipeline composed of three stages to automatically identify files with defects at commit time through the use of the SZZ algorithm.
@@ -131,24 +131,20 @@ Results considering a model with only partially defective commits (Ref. Table 3.
 ### Cold start
 To run all scripts from scratch on a 40 cores machine we took 4 weeks. Therefore, if yuo want save time just clone the repository, skip this part, and focus on ```warm start```.
 
-Clone the repository on your local machine ```git clone https://github.com/lucapascarella/JIT-file-level.gi```
+Clone the repository on your local machine ```git clone https://github.com/lucapascarella/JSS-2018-JIT-File-Level.git```
 
-This example for the smallest (fastest) project, i.e., JDeodorant.
-
-```python3 miner-6.py```
+Create project folder ```mkdir projects```
 
 ### Warm start
 For a fast run, you can use our previously extracted metrics. ```data``` contains two archives with all metrics already extracted.
 
 Use the following commands to extract and move metrics data:
 
-Clone the repository if not done yet ```git clone https://github.com/lucapascarella/JIT-file-level.gi```
-
 Extract CSV files ```tar -xzvf data/csv.tar.gz```
 
 Extract TXT files ```tar -xzvf data/txt.tar.gz```
 
-Move extracted data into root ```mv data/projects .```
+Move extracted data into root ```mv data/projects/* projects```
 
 
 ### Create a virtual environment and install requirements
@@ -169,7 +165,7 @@ Run script (e.g., JDeodorant) ```python3 miner-6.py```
 
 Repeat the above step for every project you want to analyze.
 
-Change working directory ```cd ..```
+Return to root-project working directory ```cd ..```
 
 ### Extract metrics (independent variables)
 

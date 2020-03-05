@@ -1,5 +1,5 @@
 # Exclude cloned projects
-projects/
+projects/*
 
 # Exlude virtual environment
 venv/
