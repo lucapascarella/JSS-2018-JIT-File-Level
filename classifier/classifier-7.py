@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
@@ -31,17 +30,8 @@ def training():
     probs = pd.DataFrame(rf_model.predict_proba(X_test))
 
     # Store metrics
-    rf_accuracy = metrics.accuracy_score(y_test, predicted)
     rf_roc_auc = metrics.roc_auc_score(y_test, probs[1])
-    rf_confus_matrix = metrics.confusion_matrix(y_test, predicted)
-    rf_classification_report = metrics.classification_report(y_test, predicted)
-    rf_precision = metrics.precision_score(y_test, predicted, pos_label=1)
-    rf_recall = metrics.recall_score(y_test, predicted, pos_label=1)
-    rf_f1 = metrics.f1_score(y_test, predicted, pos_label=1)
 
-    print("Precision: {:>5}%".format(round(rf_precision * 100, 1)))
-    print("Recall: {:>8}%".format(round(rf_recall * 100, 1)))
-    print("F-1: {:>11}%".format(round(rf_f1 * 100, 1)))
     print("AUC-ROC: {:>7}%".format(round(rf_roc_auc * 100, 1)))
 
     y_pred = model.predict(X_test)
