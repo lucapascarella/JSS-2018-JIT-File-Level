@@ -3,7 +3,7 @@ from datetime import datetime
 from pydriller import RepositoryMining, GitRepository
 from pydriller.domain.commit import ModificationType
 
-from extractor import Miner
+from metrics.extractor import Miner
 
 working_path = "projects/"
 repo_name = "accumulo"
