@@ -210,6 +210,24 @@ Repeat the above step for every project you want to analyze.
 
 Change working directory ```cd ..```
 
+## RQ3 – Investigating the importance of the features
+
+While in RQ2 we provide an overview of the accuracy of the proposed model in predicting defective files at commit level, RQ3 investigates which features contribute the most to the prediction capabilities.
+We anwsered the third research question by using Weka tool, and in particular the InfoGainAttributeEval option.
+
+To generate the coumns of Table 3.7, we performed the analysis by projects.
+
+1. Start Weka GUI tool, we used version 3.8.3. 
+2. Select "Explorer" button.
+3. Click on "Open file ..." button and select one of the ten <project>_metrics.csv file.
+4. Remove unwanted columns that are not features as in Fig. XX. You must obtain a list of features as in Fig. XX   
+5. Move to "Select attributes" tab, click on "Choose" button and select InfoFainAttributeEval.
+6. Click on "Start" button and wait for the final rank as shown in Fig 3.
+7. Repeat from step 3 for the other projects.
+
+Fig 1. ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+Fig 2. ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+Fig 3. ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 ## License
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
