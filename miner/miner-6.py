@@ -90,7 +90,7 @@ def miner():
 
     # Count fully and partially defective commits, and defective files in defective commits
     bic_csv = os.path.abspath(working_path + repo_name + "_partial_bic.csv")
-    header = ["bic_hash", "bic_size", "bic_path", "defective"]
+    header = ["bic_hash", "bic_size", "bic_file_size", "bic_path", "defective"]
     if not os.path.exists(bic_csv):
         print("Counting partial BIC")
         out_file = open(bic_csv, 'w', newline='', encoding="utf-8")
@@ -104,6 +104,7 @@ def miner():
             for mod in commit.modifications:
                 if mod.filename.endswith(tuple(extensions)):
                     dout["bic_path"] = mod.new_path
+                    dout["bic_file_size"] = mod.nloc
                     if mod.new_path in unique_fics:
                         diff -= 1
                         dout["defective"] = True

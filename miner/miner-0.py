@@ -2,7 +2,7 @@ import csv, os
 from datetime import datetime
 from pydriller import RepositoryMining, GitRepository
 
-working_path = "projects/"
+working_path = "../projects/"
 repo_name = "accumulo"
 repo_git = "https://github.com/apache/accumulo.git"
 extensions = [".java", ".js"] #, ".pm"

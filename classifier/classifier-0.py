@@ -13,9 +13,6 @@ project = "accumulo"
 
 
 def training():
-    # a = [1, 2, 3, 4, 5]
-    # print(a[-3:])
-
     dataset = pd.read_csv(working_path + project + "_metrics.csv")
     X = dataset.iloc[:, 6:30].values
     y = dataset.iloc[:, 31].values

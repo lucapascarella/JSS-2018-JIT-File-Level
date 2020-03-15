@@ -2,10 +2,8 @@ import csv
 import os
 
 working_path = "../projects/"
-project = "accumulo"
-
-
 # projects = ["accumulo", "angular.js", "bugzilla", "gerrit", "gimp", "hadoop", "JDeodorant", "jetty.project", "jruby", "openjpa"]
+projects = ["accumulo", "angular.js", "bugzilla", "gerrit", "gimp", "hadoop"]
 
 class Bic:
     def __init__(self, hash: str):
@@ -14,11 +12,10 @@ class Bic:
         self.size = 0
 
 
-def effort_optimal(input: str):
+def effort_optimal(project : str, input: str):
     total_size = 0
     total_bugs = 0
     bics = {}
-    # for project in projects:
     in_file = os.path.abspath(working_path + project + input)
     in_csv = open(in_file, 'r', newline='', encoding="utf-8")
     csv_reader = csv.DictReader(in_csv, delimiter=',')
@@ -65,7 +62,7 @@ def effort_optimal(input: str):
     out_csv.close()
 
 
-def effort_pred(input: str):
+def effort_pred(project: str, input: str):
     # for project in projects:
     in_file = os.path.abspath(working_path + project + "_partial_bic.csv")
     in_csv = open(in_file, 'r', newline='', encoding="utf-8")
@@ -142,6 +139,26 @@ def effort_pred(input: str):
         out_csv.flush()
     out_csv.close()
 
+    total_size = 0
+    total_bugs = 0
+    bics = {}
+    # for project in projects:
+    in_file = os.path.abspath(working_path + project + input)
+    in_csv = open(in_file, 'r', newline='', encoding="utf-8")
+    csv_reader = csv.DictReader(in_csv, delimiter=',')
+    for row in csv_reader:
+        size = row["bic_file_size"]
+        key = row["bic_hash"] + "$$" + row["bic_path"]
+        if size is not "":
+            size_int = 1
+            defective = 1 if row["defective"].upper() == "TRUE" else 0
+            if key not in bics:
+                bics[key] = Bic(key)
+            bics[key].defective = defective
+            bics[key].size = size_int
+            total_size += size_int
+            total_bugs += defective
+
     header = ["eff", "def_kamei"]
     out_file = os.path.abspath(working_path + project + "_effort_kamei.csv")
     out_csv = open(out_file, 'w', newline='', encoding="utf-8")
@@ -174,6 +191,7 @@ def effort_pred(input: str):
 
 if __name__ == '__main__':
     print("*** Effort started ***\n")
-    effort_optimal("_partial_bic_ordered.csv")
-    effort_pred("_partial_predict_bic.csv")
+    for project in projects:
+        effort_optimal(project, "_partial_bic_ordered.csv")
+        effort_pred(project, "_partial_predict_bic.csv")
     print("*** Effort ended ***\n")
