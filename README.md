@@ -237,7 +237,16 @@ RQ4 investigates the potential benefits in terms of saved effort that the fine-g
 
 To generate the ten figures in the thesis, we performed the analysis by projects. You can iterate on the following steps to achieve our results.
 
-1. Execute the script
+1. Prepare the optimal technique input. Make a copy of *<project>_partial_bic.csv* an rename in *<project>_partial_bic_ordered.csv*.
+2. Open the file with Excel, order first by _bic_file_size_ *AtoZ*, than order by _defective_ *ZtoA*, finally, save results in *<project>_partial_bic_ordered.csv*.
+3. Execute the script effort/effort.py. Select your project name by changing the hard coded string project, then uncomment in the main only one method at time, in this case uncomment effort_optimal("_partial_bic_ordered.csv")
+4. Open the generated file <project>_effort.csv and copy the two columns in a new Excel file.
+5. Rename the column _def_ in _optimal_
+6. Execute the script effort/effort.py. Select your project name by changing the hard coded string project, then uncomment in the main only one method at time, in this case uncomment effort_pred()
+7. Execute the script effort/effort.py. Select your project name by changing the hard coded string project, then uncomment in the main only one method at time, in this case uncomment effort_optimal("_partial_predict_bic.csv")
+8. Open the generated file <project>_effort.csv and copy the column def in previous created new Excel file.
+9. Rename the column _def_ in _our_
+10. Change
 
 ## License
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
