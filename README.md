@@ -237,19 +237,19 @@ RQ4 investigates the potential benefits in terms of saved effort that the fine-g
 
 To generate the ten figures in the thesis, we performed the analysis by projects. You can iterate on the following steps to achieve our results.
 
-Perform the following step for evry project
+Perform the following step for every project:
 1. Prepare the optimal technique input. Make a copy of *<project>_partial_bic.csv* an rename in *<project>_partial_bic_ordered.csv*.
 2. Open the file with Excel, sort first by _bic_file_size_ *AtoZ*, than sort by _defective_ *ZtoA*, finally, save results in *<project>_partial_bic_ordered.csv*.
 
-Now, 
-3. Execute the script effort/effort.py. Select your project name by changing the hard coded string project, then uncomment in the main only one method at time, in this case uncomment effort_optimal("_partial_bic_ordered.csv")
-4. Open the generated file <project>_effort.csv and copy the two columns in a new Excel file.
-5. Rename the column _def_ in _optimal_
-6. Execute the script effort/effort.py. Select your project name by changing the hard coded string project, then uncomment in the main only one method at time, in this case uncomment effort_pred()
-7. Execute the script effort/effort.py. Select your project name by changing the hard coded string project, then uncomment in the main only one method at time, in this case uncomment effort_optimal("_partial_predict_bic.csv")
-8. Open the generated file <project>_effort.csv and copy the column def in previous created new Excel file.
-9. Rename the column _def_ in _our_
-10. Change
+Now, to generate the ten plots: 
+1. Execute the script effort/effort.py. This script generates three files per project: <project>_effort_optimal.csv, <project>_effort_our.csv, and <project>_effort_kamei.csv
+2. Open <project>_effort_optimal.csv and copy the two columns in a new Excel file, e.g, <project>_plot.x.
+3. Open <project>_effort_our.csv and copy the column *def_our* in the previous created new Excel file, e.g, <project>_plot.xlsx.
+4. Open <project>_effort_our.csv and copy the column *def_kamei* in the previous created new Excel file, e.g, <project>_plot.xlsx.
+5. Use the four columns in <project>_plot.xlsx to generate a scatter plot.
+
+NOTE. In the data.tzr.gz there are already the ten <project>_plot.xlsx files with plots and areas.
+
 
 ## License
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at

@@ -15,10 +15,10 @@ project = "gerrit"
 def training():
     dataset = pd.read_csv(working_path + project + "_metrics.csv")
     X = dataset.iloc[:, 6:30].values
-    y = dataset.iloc[:, 31].values
+    y = dataset.iloc[:, 30].values
     offset = 10000
     X_proba = dataset.iloc[-offset:, 6:30].values
-    y_proba = dataset.iloc[-offset:, 31].values
+    y_proba = dataset.iloc[-offset:, 30].values
 
     X_train, X_test, y_train, y_test = train_test_split(X, y)
     sc = StandardScaler()
@@ -30,9 +30,9 @@ def training():
     rf_model.score(X_train, y_train)
 
     # Get classification
-    y_pred_proba = model.predict(sc.fit_transform(X_proba))
-    print(confusion_matrix(y_proba, y_pred_proba.round()))
-    print(classification_report(y_proba, y_pred_proba.round()))
+    y_pred_proba = model.predict_proba(sc.fit_transform(X_proba))
+    # print(confusion_matrix(y_proba, y_pred_proba.round()))
+    # print(classification_report(y_proba, y_pred_proba.round()))
 
     in_file = os.path.abspath(working_path + project + "_metrics.csv")
     in_csv = open(in_file, 'r', newline='', encoding="utf-8")
@@ -41,15 +41,15 @@ def training():
     for row in csv_reader:
         rows.append(row)
 
-    header = ["bic_hash", "bic_path", "defective"]
+    header = ["bic_hash", "bic_path", "actual", "defective", "prob"]
     out_file = os.path.abspath(working_path + project + "_pred.csv")
     out_csv = open(out_file, 'w', newline='', encoding="utf-8")
     writer = csv.DictWriter(out_csv, delimiter=',', fieldnames=header)
     writer.writeheader()
     for i in range(0, len(y_pred_proba)):
         row = rows[len(rows) - offset + i]
-        # print("Hash: {} Test: {} Pred {}".format(row["key"], y_proba[i], y_pred_proba[i]))
-        d = {"bic_hash": row["git_hash"], "bic_path": row["path"], "defective": y_pred_proba[i]}
+        defective = "TRUE" if y_pred_proba[i][0] <= 0.5 else "FALSE"
+        d = {"bic_hash": row["git_hash"], "bic_path": row["path"], "actual": row["file_buggy"], "defective": defective, "prob": y_pred_proba[i][1]}
         writer.writerow(d)
 
     # Predictions/probs on the test dataset
